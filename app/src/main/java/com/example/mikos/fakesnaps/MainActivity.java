@@ -1,5 +1,6 @@
 package com.example.mikos.fakesnaps;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -15,10 +16,15 @@ public class MainActivity extends Activity {
     private static int RESULT_LOAD_IMG = 1;
     String imgDecodableString;
 
+    private String[] galleryPermissions = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+    private ImageView imgView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        imgView = (ImageView) findViewById(R.id.imgView);
     }
 
     public void loadImagefromGallery(View view) {
@@ -27,7 +33,7 @@ public class MainActivity extends Activity {
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         // Start the Intent
         startActivityForResult(galleryIntent, RESULT_LOAD_IMG);
-    }//CREDIT http://programmerguru.com/android-tutorial/how-to-pick-image-from-gallery/
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -35,25 +41,11 @@ public class MainActivity extends Activity {
         try {
             // When an Image is picked
             if (requestCode == RESULT_LOAD_IMG && resultCode == RESULT_OK
-                    && null != data) {
+                    && data != null) {
                 // Get the Image from data
 
                 Uri selectedImage = data.getData();
-                String[] filePathColumn = { MediaStore.Images.Media.DATA };
-
-                // Get the cursor
-                Cursor cursor = getContentResolver().query(selectedImage,
-                        filePathColumn, null, null, null);
-                // Move to first row
-                cursor.moveToFirst();
-
-                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                imgDecodableString = cursor.getString(columnIndex);
-                cursor.close();
-                ImageView imgView = (ImageView) findViewById(R.id.imgView);
-                // Set the Image in ImageView after decoding the String
-                imgView.setImageBitmap(BitmapFactory
-                        .decodeFile(imgDecodableString));
+                imgView.setImageURI(selectedImage);
 
             } else {
                 Toast.makeText(this, "You haven't picked Image",
