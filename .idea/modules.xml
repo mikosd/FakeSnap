@@ -2,12 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/FakeSnap.iml" filepath="$PROJECT_DIR$/FakeSnap.iml" />
       <module fileurl="file://C:\Users\mikos\AndroidStudioProjects\FakeSnaps\FakeSnap.iml" filepath="C:\Users\mikos\AndroidStudioProjects\FakeSnaps\FakeSnap.iml" />
-      <module fileurl="file://C:\Users\JohnL\AndroidStudioProjects\FakeSnap\FakeSnap.iml" filepath="C:\Users\JohnL\AndroidStudioProjects\FakeSnap\FakeSnap.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FakeSnaps.iml" filepath="$PROJECT_DIR$/FakeSnaps.iml" />
       <module fileurl="file://C:\Users\IGotDanimals\AndroidStudioProjects\FakeSnap\FakeSnaps.iml" filepath="C:\Users\IGotDanimals\AndroidStudioProjects\FakeSnap\FakeSnaps.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Users\JohnL\AndroidStudioProjects\FakeSnap\app\app.iml" filepath="C:\Users\JohnL\AndroidStudioProjects\FakeSnap\app\app.iml" />
     </modules>
   </component>
 </project>
