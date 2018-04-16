@@ -105,6 +105,7 @@ public class MainActivity extends Activity {
                     @Override
                     public void onClick(DialogInterface dialog, int selectedColor, Integer[] allColors) {
                         Toast.makeText(getApplicationContext(),"Color Selected: 0x" + Integer.toHexString(selectedColor),Toast.LENGTH_SHORT).show();
+                        imgView.setCurrentColor(selectedColor);
                     }
                 })
                 .setNegativeButton("cancel", new DialogInterface.OnClickListener() {

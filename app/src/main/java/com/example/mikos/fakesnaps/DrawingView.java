@@ -94,7 +94,7 @@ public class DrawingView extends ImageView {
         mLoadBit = mBitmap;
         setmCanvas(new Canvas(mBitmap));
 
-        currentColor = START_COLOR;
+        setCurrentColor(START_COLOR);
         strokeWidth = BRUSH_SIZE;
     }
 
@@ -140,7 +140,7 @@ public class DrawingView extends ImageView {
     * */
     private void touchStart(float x, float y) {
         mPath = new Path();
-        DrawingPath dp = new DrawingPath(currentColor, strokeWidth, mPath);
+        DrawingPath dp = new DrawingPath(getCurrentColor(), strokeWidth, mPath);
         paths.add(dp);
         mPath.reset();
         mPath.moveTo(x, y);
@@ -200,5 +200,13 @@ public class DrawingView extends ImageView {
 
     public void setmLoadBit(Bitmap mLoadBit) {
         this.mLoadBit = mLoadBit;
+    }
+
+    public int getCurrentColor() {
+        return currentColor;
+    }
+
+    public void setCurrentColor(int currentColor) {
+        this.currentColor = currentColor;
     }
 }
