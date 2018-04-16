@@ -8,24 +8,20 @@
     <com.example.mikos.fakesnaps.DrawingView
         android:id="@+id/imgView"
         android:layout_width="fill_parent"
-        android:layout_height="732dp"
-        android:layout_weight="1"></com.example.mikos.fakesnaps.DrawingView>
-
-    <Button
-        android:id="@+id/buttonLoadPicture"
-        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="0"
-        android:onClick="loadImagefromGallery"
-        android:text="Load Picture" >
-    </Button>
+        android:layout_weight="1"></com.example.mikos.fakesnaps.DrawingView>
 
 
     <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/fam"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_gravity="bottom|right"
         fab:menu_animationDelayPerItem="55"
         fab:menu_backgroundColor="@android:color/transparent"
         fab:menu_buttonSpacing="0dp"
@@ -64,8 +60,9 @@
             android:id="@+id/material_design_floating_action_menu_item2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="loadImagefromGallery"
             android:src="@drawable/anti_snapchat"
-            fab:fab_label="Menu Item 2"
+            fab:fab_label="Load Image"
             fab:fab_size="mini" />
 
         <com.github.clans.fab.FloatingActionButton
