@@ -5,11 +5,11 @@
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <ImageView
+    <com.example.mikos.fakesnaps.DrawingView
         android:id="@+id/imgView"
         android:layout_width="fill_parent"
         android:layout_height="732dp"
-        android:layout_weight="1"></ImageView>
+        android:layout_weight="1"></com.example.mikos.fakesnaps.DrawingView>
 
     <Button
         android:id="@+id/buttonColor"

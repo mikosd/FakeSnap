@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
@@ -13,6 +14,7 @@ import android.provider.MediaStore;
 import android.support.annotation.ColorInt;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -30,15 +32,17 @@ public class MainActivity extends Activity {
     String imgDecodableString;
 
     private String[] galleryPermissions = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-    private ImageView imgView;
+    private DrawingView imgView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        imgView = (ImageView) findViewById(R.id.imgView);
-
+        imgView = (DrawingView) findViewById(R.id.imgView);
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        imgView.init(metrics);
         Button button = (Button)findViewById(R.id.buttonColor);
         button.setOnClickListener(new ColorListener());
 
@@ -65,18 +69,26 @@ public class MainActivity extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
         try {
             // When an Image is picked
-            if (requestCode == RESULT_LOAD_IMG && resultCode == RESULT_OK
+            if (requestCode == RESULT_LOAD_IMG
                     && data != null) {
                 // Get the Image from data
+
                 Uri selectedImage = data.getData();
-                imgView.setImageURI(selectedImage);
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
+                DisplayMetrics metrics = new DisplayMetrics();
+                getWindowManager().getDefaultDisplay().getMetrics(metrics);
+                imgView.clear();
+                imgView.setmLoadBit(Bitmap.createScaledBitmap(bitmap,metrics.widthPixels,metrics.heightPixels,false));
+                imgView.invalidate();
             } else {
                 Toast.makeText(this, "You haven't picked Image",
                         Toast.LENGTH_LONG).show();
             }
         } catch (Exception e) {
-            Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG)
+                    .show();
         }
+
     }
 
     private class ColorListener implements View.OnClickListener {
