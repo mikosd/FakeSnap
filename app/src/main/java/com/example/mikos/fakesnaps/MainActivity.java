@@ -4,27 +4,24 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.annotation.ColorInt;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+
+import com.github.clans.fab.FloatingActionButton;
+
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.flask.colorpicker.ColorPickerView;
 import com.flask.colorpicker.OnColorSelectedListener;
 import com.flask.colorpicker.builder.ColorPickerClickListener;
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder;
+import com.github.clans.fab.FloatingActionMenu;
 
 
 public class MainActivity extends Activity {
@@ -43,17 +40,13 @@ public class MainActivity extends Activity {
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         imgView.init(metrics);
-        Button button = (Button)findViewById(R.id.buttonColor);
-        button.setOnClickListener(new ColorListener());
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
+        FloatingActionMenu menu = (FloatingActionMenu)findViewById(R.id.fam);
+        FloatingActionButton colorpickerFAB = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item1);
+        colorpickerFAB.setOnClickListener(new ColorListener());
+     //   FloatingActionButton  = findViewById(R.id.);
+     //   FloatingActionButton  = findViewById(R.id.);
     }
 
     public void loadImagefromGallery(View view) {
