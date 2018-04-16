@@ -23,8 +23,6 @@ import com.flask.colorpicker.builder.ColorPickerClickListener;
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder;
 
 
-
-
 public class MainActivity extends Activity {
     private static int RESULT_LOAD_IMG = 1;
     String imgDecodableString;
@@ -41,8 +39,6 @@ public class MainActivity extends Activity {
 
         Button button = (Button)findViewById(R.id.buttonColor);
         button.setOnClickListener(new ColorListener());
-
-
     }
 
     public void loadImagefromGallery(View view) {
@@ -61,19 +57,15 @@ public class MainActivity extends Activity {
             if (requestCode == RESULT_LOAD_IMG && resultCode == RESULT_OK
                     && data != null) {
                 // Get the Image from data
-
                 Uri selectedImage = data.getData();
                 imgView.setImageURI(selectedImage);
-
             } else {
                 Toast.makeText(this, "You haven't picked Image",
                         Toast.LENGTH_LONG).show();
             }
         } catch (Exception e) {
-            Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG)
-                    .show();
+            Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();
         }
-
     }
 
     private class ColorListener implements View.OnClickListener {
@@ -82,31 +74,28 @@ public class MainActivity extends Activity {
         public void onClick(View view) {
 
             ColorPickerDialogBuilder
-                    .with(MainActivity.this )
-                    .setTitle("Choose color")
-                    .initialColor(Color.BLACK)
-                    .wheelType(ColorPickerView.WHEEL_TYPE.CIRCLE)
-                    .density(12)
-                    .setOnColorSelectedListener(new OnColorSelectedListener() {
-                        @Override
-                        public void onColorSelected(int selectedColor) {
-                            Toast.makeText(getApplicationContext(),"onColorSelected: 0x" + Integer.toHexString(selectedColor),Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                    .setPositiveButton("ok", new ColorPickerClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int selectedColor, Integer[] allColors) {
-                            Toast.makeText(getApplicationContext(),"onColorSelected: 0x" + Integer.toHexString(selectedColor),Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                    .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                        }
-                    })
-                    .build()
-                    .show();
-
+                .with(MainActivity.this )
+                .setTitle("Choose color")
+                .initialColor(Color.WHITE)
+                .wheelType(ColorPickerView.WHEEL_TYPE.CIRCLE)
+                .density(12)
+                .setOnColorSelectedListener(new OnColorSelectedListener() {
+                    @Override
+                    public void onColorSelected(int selectedColor) {
+                        Toast.makeText(getApplicationContext(),"Color Selected: 0x" + Integer.toHexString(selectedColor),Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setPositiveButton("ok", new ColorPickerClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int selectedColor, Integer[] allColors) {
+                        Toast.makeText(getApplicationContext(),"Color Selected: 0x" + Integer.toHexString(selectedColor),Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {}
+                })
+                .build().show();
         }
     }
 }
