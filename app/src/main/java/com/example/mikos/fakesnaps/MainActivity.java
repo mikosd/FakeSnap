@@ -2,15 +2,28 @@ package com.example.mikos.fakesnaps;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.ColorInt;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.flask.colorpicker.ColorPickerView;
+import com.flask.colorpicker.OnColorSelectedListener;
+import com.flask.colorpicker.builder.ColorPickerClickListener;
+import com.flask.colorpicker.builder.ColorPickerDialogBuilder;
+
+
+
 
 public class MainActivity extends Activity {
     private static int RESULT_LOAD_IMG = 1;
@@ -25,6 +38,11 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         imgView = (ImageView) findViewById(R.id.imgView);
+
+        Button button = (Button)findViewById(R.id.buttonColor);
+        button.setOnClickListener(new ColorListener());
+
+
     }
 
     public void loadImagefromGallery(View view) {
@@ -58,4 +76,37 @@ public class MainActivity extends Activity {
 
     }
 
+    private class ColorListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View view) {
+
+            ColorPickerDialogBuilder
+                    .with(MainActivity.this )
+                    .setTitle("Choose color")
+                    .initialColor(Color.BLACK)
+                    .wheelType(ColorPickerView.WHEEL_TYPE.CIRCLE)
+                    .density(12)
+                    .setOnColorSelectedListener(new OnColorSelectedListener() {
+                        @Override
+                        public void onColorSelected(int selectedColor) {
+                            Toast.makeText(getApplicationContext(),"onColorSelected: 0x" + Integer.toHexString(selectedColor),Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .setPositiveButton("ok", new ColorPickerClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int selectedColor, Integer[] allColors) {
+                            Toast.makeText(getApplicationContext(),"onColorSelected: 0x" + Integer.toHexString(selectedColor),Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    })
+                    .build()
+                    .show();
+
+        }
+    }
 }

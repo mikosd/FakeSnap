@@ -7,9 +7,15 @@
     <ImageView
         android:id="@+id/imgView"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" >
-    </ImageView>
+        android:layout_height="732dp"
+        android:layout_weight="1"></ImageView>
+
+    <Button
+        android:id="@+id/buttonColor"
+        android:layout_width="113dp"
+        android:layout_height="374dp"
+        android:layout_weight="1"
+        android:text="Button" />
 
     <Button
         android:id="@+id/buttonLoadPicture"
@@ -20,5 +26,7 @@
         android:onClick="loadImagefromGallery"
         android:text="Load Picture" >
     </Button>
+
+
 
 </LinearLayout>
