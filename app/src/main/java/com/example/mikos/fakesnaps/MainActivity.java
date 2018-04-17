@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -14,8 +15,10 @@ import android.provider.MediaStore;
 
 import com.github.clans.fab.FloatingActionButton;
 
+import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +30,7 @@ import com.flask.colorpicker.builder.ColorPickerDialogBuilder;
 import com.github.clans.fab.FloatingActionMenu;
 
 import java.io.File;
+import java.io.IOException;
 
 
 public class MainActivity extends Activity {
@@ -56,8 +60,8 @@ public class MainActivity extends Activity {
         lineWidthPicker.setOnClickListener(new WidthListener());
         FloatingActionButton styleSwitcher = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item4);
         styleSwitcher.setOnClickListener(new StyleListener());
-        FloatingActionButton Undo = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item5);
-        Undo.setOnClickListener(new UndoListener());
+        FloatingActionButton undo = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item5);
+        undo.setOnClickListener(new UndoListener());
         FloatingActionButton save = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item6);
         save.setOnClickListener(new SaveListener());
     }
@@ -204,8 +208,45 @@ public class MainActivity extends Activity {
     private class SaveListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            //Bitmap bitmap = imgView.getmLoadBit();
-            //MediaStore.Images.Media.insertImage(getContentResolver(),bitmap,"lma","a");
+
+
+            AlertDialog.Builder fileDialog = new AlertDialog.Builder(MainActivity.this);
+            View dialogView = getLayoutInflater().inflate(R.layout.filename_layout, null);
+            fileDialog.setView(dialogView);
+            fileDialog.setTitle("Input File Name");
+            fileDialog.setCancelable(true);
+
+            final EditText editText = dialogView.findViewById(R.id.filename_et);
+
+            fileDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    String fileName = "";
+
+                        fileName = editText.getText().toString().trim();
+
+                    if(fileName.matches("")) {
+
+                        Toast.makeText(getApplicationContext(),"Please Try Again and Input A File Name",Toast.LENGTH_SHORT).show();
+
+                        }
+                    else {
+                        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                            try {
+                                imgView.saveImage(fileName);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+
+                }
+            });
+            fileDialog.create();
+            fileDialog.show();
+
+
 
         }
     }

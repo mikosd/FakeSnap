@@ -10,11 +10,16 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
+import android.os.Environment;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.ImageView;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 
@@ -279,5 +284,16 @@ public class DrawingView extends ImageView {
 
     public void setIsRect(boolean isRectangle) {
         this.isRectangle = isRectangle;
+    }
+
+    public void saveImage(String fileExtension) throws IOException {
+
+        Log.i("working", "working1");
+        String fileName = Environment.getExternalStorageDirectory() + "/" + fileExtension +".png";
+        OutputStream stream = new FileOutputStream(fileName);
+        mBitmap.compress(Bitmap.CompressFormat.PNG, 85, stream);
+        Log.i("working", fileName);
+        stream.close();
+
     }
 }
