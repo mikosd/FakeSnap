@@ -55,6 +55,8 @@ public class MainActivity extends Activity {
         styleSwitcher.setOnClickListener(new StyleListener());
         FloatingActionButton Undo = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item5);
         Undo.setOnClickListener(new UndoListener());
+        FloatingActionButton save = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item6);
+        save.setOnClickListener(new saveListener());
     }
 
     public void loadImagefromGallery(View view) {
@@ -193,6 +195,13 @@ public class MainActivity extends Activity {
             }else if(isStroke){
                 imgView.undoStroke();
             }
+        }
+    }
+
+    private class saveListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            
         }
     }
 }

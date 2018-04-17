@@ -229,6 +229,21 @@ public class DrawingView extends ImageView {
 
         return true;
     }
+    /*The following method is used to undo from the Strokes*/
+
+    public void undoStroke(){
+        if(paths.size()>0) {
+            paths.remove(paths.size() - 1);
+            invalidate();
+        }
+    }
+    public void undoRectangle(){
+        if(rectangles.size()>0) {
+            rectangles.remove(rectangles.size() - 1);
+            invalidate();
+        }
+    }
+
     //the following are simple getters and setters.
     public Canvas getmCanvas() {
         return mCanvas;

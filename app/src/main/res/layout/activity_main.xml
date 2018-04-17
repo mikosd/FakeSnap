@@ -84,6 +84,23 @@
             android:src="@drawable/ic_compare_arrows_white_24dp"
             fab:fab_label="Change Stroke/Rectangle"
             fab:fab_size="normal" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/material_design_floating_action_menu_item5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/oval"
+            android:src="@drawable/ic_compare_arrows_white_24dp"
+            fab:fab_label="Undo"
+            fab:fab_size="normal" />
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/material_design_floating_action_menu_item6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/oval"
+            android:src="@drawable/ic_compare_arrows_white_24dp"
+            fab:fab_label="Save"
+            fab:fab_size="normal" />
     </com.github.clans.fab.FloatingActionMenu>
 
 </FrameLayout>
