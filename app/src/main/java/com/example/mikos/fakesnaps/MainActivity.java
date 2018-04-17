@@ -2,6 +2,8 @@ package com.example.mikos.fakesnaps;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -15,6 +17,8 @@ import com.github.clans.fab.FloatingActionButton;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.flask.colorpicker.ColorPickerView;
@@ -45,8 +49,10 @@ public class MainActivity extends Activity {
         FloatingActionMenu menu = (FloatingActionMenu)findViewById(R.id.fam);
         FloatingActionButton colorpickerFAB = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item1);
         colorpickerFAB.setOnClickListener(new ColorListener());
+        FloatingActionButton lineWidthPicker = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item3);
+        lineWidthPicker.setOnClickListener(new WidthListener());
      //   FloatingActionButton  = findViewById(R.id.);
-     //   FloatingActionButton  = findViewById(R.id.);
+
     }
 
     public void loadImagefromGallery(View view) {
@@ -115,4 +121,49 @@ public class MainActivity extends Activity {
                 .build().show();
         }
     }
-}
+
+    private class WidthListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            AlertDialog.Builder widthDialog = new AlertDialog.Builder(MainActivity.this);
+            View dialongView = getLayoutInflater().inflate(R.layout.seekbar_dialog, null);
+            //widthDialog.setContentView(R.layout.seekbar_dialog);
+            widthDialog.setView(dialongView);
+            widthDialog.setTitle("Select Line Width");
+            widthDialog.setCancelable(true);
+
+            final TextView textView = dialongView.findViewById(R.id.width_size);
+            SeekBar seekBar =(SeekBar)dialongView.findViewById(R.id.width_seekBar);
+
+
+            seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                textView.setText("Line Width: " + i);
+                }
+
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar) {
+
+                }
+
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+
+                }
+            });
+
+            widthDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                }
+            });
+
+            widthDialog.create();
+            widthDialog.show();
+
+            }
+        }
+    }
+
