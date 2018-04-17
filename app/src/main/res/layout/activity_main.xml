@@ -90,7 +90,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/oval"
-            android:src="@drawable/ic_compare_arrows_white_24dp"
+            android:src="@drawable/ic_history_white_24dp"
             fab:fab_label="Undo"
             fab:fab_size="normal" />
         <com.github.clans.fab.FloatingActionButton
@@ -98,7 +98,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/oval"
-            android:src="@drawable/ic_compare_arrows_white_24dp"
+            android:src="@drawable/ic_get_app_white_24dp"
             fab:fab_label="Save"
             fab:fab_size="normal" />
     </com.github.clans.fab.FloatingActionMenu>
