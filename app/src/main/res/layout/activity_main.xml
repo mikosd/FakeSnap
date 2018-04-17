@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
@@ -65,11 +66,19 @@
             fab:fab_size="mini" />
 
         <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/material_design_floating_action_menu_item3"
+        android:id="@+id/material_design_floating_action_menu_item3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/spiral_icon"
+        fab:fab_label="Width Size"
+        fab:fab_size="mini" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/material_design_floating_action_menu_item4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/spiral_icon"
-            fab:fab_label="Width Size"
+            android:src="@android:drawable/arrow_up_float"
+            fab:fab_label="Change Stroke/Rectangle"
             fab:fab_size="mini" />
     </com.github.clans.fab.FloatingActionMenu>
 

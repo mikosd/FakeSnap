@@ -3,7 +3,6 @@ package com.example.mikos.fakesnaps;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -16,7 +15,6 @@ import com.github.clans.fab.FloatingActionButton;
 
 import android.util.DisplayMetrics;
 import android.view.View;
-import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +32,8 @@ public class MainActivity extends Activity {
 
     private String[] galleryPermissions = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
     private DrawingView imgView;
+    private boolean isRectangle = true;
+    private boolean isStroke = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +51,8 @@ public class MainActivity extends Activity {
         colorpickerFAB.setOnClickListener(new ColorListener());
         FloatingActionButton lineWidthPicker = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item3);
         lineWidthPicker.setOnClickListener(new WidthListener());
-     //   FloatingActionButton  = findViewById(R.id.);
+        FloatingActionButton styleSwitcher = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item4);
+        styleSwitcher.setOnClickListener(new StyleListener());
 
     }
 
@@ -165,5 +166,22 @@ public class MainActivity extends Activity {
 
             }
         }
+
+    private class StyleListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            if(isRectangle){
+                isRectangle = false;
+                isStroke = true;
+                imgView.setIsStroke(true);
+                imgView.setIsRect(false);
+            }else if(isStroke){
+                isRectangle = true;
+                isStroke = false;
+                imgView.setIsStroke(false);
+                imgView.setIsRect(true);
+            }
+        }
     }
+}
 

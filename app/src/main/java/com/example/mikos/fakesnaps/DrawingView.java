@@ -1,5 +1,6 @@
 package com.example.mikos.fakesnaps;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 
@@ -45,6 +46,7 @@ import java.util.ArrayList;
 
 
 
+@SuppressLint("AppCompatCustomView")
 public class DrawingView extends ImageView {
 
     public static int BRUSH_SIZE = 20;
@@ -249,5 +251,17 @@ public class DrawingView extends ImageView {
 
     public void setCurrentColor(int currentColor) {
         this.currentColor = currentColor;
+    }
+
+    public void setStrokeWidth(int strokeWidth) {
+        this.strokeWidth = strokeWidth;
+    }
+
+    public void setIsStroke(boolean isStroke) {
+        this.isStroke = isStroke;
+    }
+
+    public void setIsRect(boolean isRectangle) {
+        this.isRectangle = isRectangle;
     }
 }
