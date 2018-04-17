@@ -127,14 +127,14 @@ public class MainActivity extends Activity {
         @Override
         public void onClick(View view) {
             AlertDialog.Builder widthDialog = new AlertDialog.Builder(MainActivity.this);
-            View dialongView = getLayoutInflater().inflate(R.layout.seekbar_dialog, null);
+            View dialogView = getLayoutInflater().inflate(R.layout.seekbar_dialog, null);
             //widthDialog.setContentView(R.layout.seekbar_dialog);
-            widthDialog.setView(dialongView);
+            widthDialog.setView(dialogView);
             widthDialog.setTitle("Select Line Width");
             widthDialog.setCancelable(true);
 
-            final TextView textView = dialongView.findViewById(R.id.width_size);
-            final SeekBar seekBar =(SeekBar)dialongView.findViewById(R.id.width_seekBar);
+            final TextView textView = dialogView.findViewById(R.id.width_size);
+            final SeekBar seekBar =(SeekBar)dialogView.findViewById(R.id.width_seekBar);
 
 
             seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {

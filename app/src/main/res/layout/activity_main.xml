@@ -52,34 +52,38 @@
             android:id="@+id/material_design_floating_action_menu_item1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/spiral_icon"
+            android:background="@drawable/oval"
+            android:src="@drawable/ic_format_paint_white_24dp"
             fab:fab_label="Color Picker"
-            fab:fab_size="mini" />
+            fab:fab_size="normal" />
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/material_design_floating_action_menu_item2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/oval"
             android:onClick="loadImagefromGallery"
-            android:src="@drawable/anti_snapchat"
+            android:src="@drawable/ic_insert_photo_white_24dp"
             fab:fab_label="Load Image"
-            fab:fab_size="mini" />
+            fab:fab_size="normal" />
 
         <com.github.clans.fab.FloatingActionButton
         android:id="@+id/material_design_floating_action_menu_item3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/spiral_icon"
+        android:background="@drawable/oval"
+        android:src="@drawable/ic_brush_white_24dp"
         fab:fab_label="Width Size"
-        fab:fab_size="mini" />
+        fab:fab_size="normal" />
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/material_design_floating_action_menu_item4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@android:drawable/arrow_up_float"
+            android:background="@drawable/oval"
+            android:src="@drawable/ic_compare_arrows_white_24dp"
             fab:fab_label="Change Stroke/Rectangle"
-            fab:fab_size="mini" />
+            fab:fab_size="normal" />
     </com.github.clans.fab.FloatingActionMenu>
 
 </FrameLayout>
