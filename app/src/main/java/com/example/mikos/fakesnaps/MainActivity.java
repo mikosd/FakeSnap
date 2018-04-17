@@ -53,7 +53,8 @@ public class MainActivity extends Activity {
         lineWidthPicker.setOnClickListener(new WidthListener());
         FloatingActionButton styleSwitcher = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item4);
         styleSwitcher.setOnClickListener(new StyleListener());
-
+        FloatingActionButton Undo = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item5);
+        Undo.setOnClickListener(new UndoListener());
     }
 
     public void loadImagefromGallery(View view) {
@@ -180,6 +181,17 @@ public class MainActivity extends Activity {
                 isStroke = false;
                 imgView.setIsStroke(false);
                 imgView.setIsRect(true);
+            }
+        }
+    }
+
+    private class UndoListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            if(isRectangle){
+                imgView.undoRectangle();
+            }else if(isStroke){
+                imgView.undoStroke();
             }
         }
     }
