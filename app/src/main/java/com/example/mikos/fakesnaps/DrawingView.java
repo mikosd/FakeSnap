@@ -116,6 +116,7 @@ public class DrawingView extends ImageView {
     public void clear() {
         backgroundColor = START_BG_COLOR;
         paths.clear();
+        rectangles.clear();
         invalidate();
     }
 
