@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -24,6 +25,8 @@ import com.flask.colorpicker.OnColorSelectedListener;
 import com.flask.colorpicker.builder.ColorPickerClickListener;
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder;
 import com.github.clans.fab.FloatingActionMenu;
+
+import java.io.File;
 
 
 public class MainActivity extends Activity {
@@ -56,7 +59,7 @@ public class MainActivity extends Activity {
         FloatingActionButton Undo = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item5);
         Undo.setOnClickListener(new UndoListener());
         FloatingActionButton save = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item6);
-        save.setOnClickListener(new saveListener());
+        save.setOnClickListener(new SaveListener());
     }
 
     public void loadImagefromGallery(View view) {
@@ -190,6 +193,7 @@ public class MainActivity extends Activity {
     private class UndoListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
+
             if(isRectangle){
                 imgView.undoRectangle();
             }else if(isStroke){
@@ -197,12 +201,14 @@ public class MainActivity extends Activity {
             }
         }
     }
-
-    private class saveListener implements View.OnClickListener {
+    private class SaveListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            
+            //Bitmap bitmap = imgView.getmLoadBit();
+            //MediaStore.Images.Media.insertImage(getContentResolver(),bitmap,"lma","a");
+
         }
     }
+
 }
 
