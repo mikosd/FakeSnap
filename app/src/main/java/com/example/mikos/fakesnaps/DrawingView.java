@@ -8,6 +8,7 @@ import android.graphics.Color;
 
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
@@ -52,8 +53,12 @@ public class DrawingView extends ImageView {
     private static final float TOUCH_TOLERANCE = 4;
     private float mX, mY;
     private Path mPath;
+    private DrawingRectangle mRectangle;
     private Paint mPaint;
+
     private ArrayList<DrawingPath> paths = new ArrayList<>();
+    private ArrayList<DrawingRectangle> rectangles = new ArrayList<>();
+
     private int currentColor;
     private int backgroundColor = START_BG_COLOR;
     private int strokeWidth;
@@ -61,6 +66,8 @@ public class DrawingView extends ImageView {
     private Bitmap mLoadBit;
     private Canvas mCanvas;
     private Paint mBitmapPaint = new Paint(Paint.DITHER_FLAG);
+    private boolean isRectangle;
+    private boolean isStroke;
 
     public DrawingView(Context context) {
         this(context, null);
@@ -77,7 +84,8 @@ public class DrawingView extends ImageView {
         mPaint.setStrokeCap(Paint.Cap.ROUND);
         mPaint.setXfermode(null);
         mPaint.setAlpha(0xff);
-
+        isRectangle = true;
+        isStroke=false;
     }
 
 
@@ -127,6 +135,13 @@ public class DrawingView extends ImageView {
             getmCanvas().drawPath(drawingPath.path, mPaint);
 
         }
+        for (DrawingRectangle r : rectangles){
+            mPaint.setColor(r.color);
+            mPaint.setStrokeWidth(r.strokeWidth);
+
+            getmCanvas().drawRect(r.rectangle,mPaint);
+
+        }
 
         canvas.drawBitmap(mBitmap, 0, 0, mBitmapPaint);
         canvas.restore();
@@ -139,28 +154,54 @@ public class DrawingView extends ImageView {
     *, and touch up finishes the touch event
     * */
     private void touchStart(float x, float y) {
-        mPath = new Path();
-        DrawingPath dp = new DrawingPath(getCurrentColor(), strokeWidth, mPath);
-        paths.add(dp);
-        mPath.reset();
-        mPath.moveTo(x, y);
-        mX = x;
-        mY = y;
-    }
-
-    private void touchMove(float x, float y) {
-        float dx = Math.abs(x - mX);
-        float dy = Math.abs(y - mY);
-
-        if (dx >= TOUCH_TOLERANCE || dy >= TOUCH_TOLERANCE) {
-            mPath.quadTo(mX, mY, (x + mX) / 2, (y + mY) / 2);
+        if(isStroke) {
+            mPath = new Path();
+            DrawingPath dp = new DrawingPath(getCurrentColor(), strokeWidth, mPath);
+            paths.add(dp);
+            mPath.reset();
+            mPath.moveTo(x, y);
             mX = x;
             mY = y;
+        }else if(isRectangle){
+            Rect r = new Rect();
+            mRectangle = new DrawingRectangle(getCurrentColor(),strokeWidth, r );
+            mRectangle.rectangle.left = (int)x;
+            mRectangle.rectangle.top = (int)y;
+            mX = x;
+            mY = y;
+
         }
     }
 
+    private void touchMove(float x, float y) {
+        if(isStroke){
+            float dx = Math.abs(x - mX);
+            float dy = Math.abs(y - mY);
+
+             if (dx >= TOUCH_TOLERANCE || dy >= TOUCH_TOLERANCE) {
+                 mPath.quadTo(mX, mY, (x + mX) / 2, (y + mY) / 2);
+                   mX = x;
+                 mY = y;
+              }
+         }if(isRectangle){
+            float dx = Math.abs(x - mX);
+            float dy = Math.abs(y - mY);
+            mX = x;
+            mY = y;
+        }
+
+    }
+
     private void touchUp() {
-        mPath.lineTo(mX, mY);
+        if(isStroke) {
+            mPath.lineTo(mX, mY);
+        }
+        if(isRectangle){
+            mRectangle.rectangle.right= (int)mX;
+            mRectangle.rectangle.bottom= (int)mY;
+            rectangles.add(mRectangle);
+        }
+
     }
 
     @Override
