@@ -133,7 +133,7 @@ public class MainActivity extends Activity {
             widthDialog.setCancelable(true);
 
             final TextView textView = dialongView.findViewById(R.id.width_size);
-            SeekBar seekBar =(SeekBar)dialongView.findViewById(R.id.width_seekBar);
+            final SeekBar seekBar =(SeekBar)dialongView.findViewById(R.id.width_seekBar);
 
 
             seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -156,7 +156,7 @@ public class MainActivity extends Activity {
             widthDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-
+                imgView.setStrokeWidth(seekBar.getProgress());
                 }
             });
 
